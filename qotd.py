@@ -1,4 +1,3 @@
-from ctypes import sizeof
 import random
 from flask import Flask
 
