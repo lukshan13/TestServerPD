@@ -1,2 +1,4 @@
-Flask 
-uWSGI
+Flask
+requests
+opentelemetry-distro
+opentelemetry-instrumentation-flask
