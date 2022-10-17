@@ -21,7 +21,7 @@ def doRequest():
     quote = quotes[randint]
     print(request.args.get("param"))
     print(quote)
-    time.sleep(0.8)
+    time.sleep(4)
     return(quote)
 
 
