@@ -6,4 +6,6 @@ WORKDIR /app
 
 COPY . .
 
-cmd java -jar pd-runner.jar
+
+
+entrypoint ./pre-run.sh
