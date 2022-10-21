@@ -10,8 +10,10 @@ from opentelemetry.sdk.trace import TracerProvider
 from opentelemetry.sdk.trace.export import BatchSpanProcessor
 from opentelemetry.sdk.trace.export import ConsoleSpanExporter
 
+import SLConsoleSpanExporter
+
 provider = TracerProvider()
-processor = BatchSpanProcessor(ConsoleSpanExporter())
+processor = BatchSpanProcessor(SLConsoleSpanExporter.SLConsoleSpanExporter())
 provider.add_span_processor(processor)
 trace.set_tracer_provider(provider)
 tracer = trace.get_tracer(__name__)
