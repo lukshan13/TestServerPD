@@ -3,6 +3,19 @@ import requests
 from flask import Flask, request
 import time
 
+from opentelemetry import trace
+
+from opentelemetry.sdk.resources import Resource
+from opentelemetry.sdk.trace import TracerProvider
+from opentelemetry.sdk.trace.export import BatchSpanProcessor
+from opentelemetry.sdk.trace.export import ConsoleSpanExporter
+
+provider = TracerProvider()
+processor = BatchSpanProcessor(ConsoleSpanExporter())
+provider.add_span_processor(processor)
+trace.set_tracer_provider(provider)
+tracer = trace.get_tracer(__name__)
+
 
 app = Flask(__name__)
 
@@ -10,8 +23,8 @@ app = Flask(__name__)
 @app.route("/")
 def qotd():
 
- 
-    return doRequest()
+    with tracer.start_as_current_span("quote_request"):
+        return doRequest()
 
 
         
@@ -19,9 +32,12 @@ def qotd():
 def doRequest():
     randint = random.randint(0, len(quotes)-1)
     quote = quotes[randint]
-    print(request.args.get("param"))
     print(quote)
-    time.sleep(4)
+    time.sleep(0)
+    i = random.randint(0,5)
+    print(i)
+    if i == 5:
+        raise KeyError("Lol")
     return(quote)
 
 
