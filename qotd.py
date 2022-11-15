@@ -11,7 +11,7 @@ from opentelemetry.sdk.trace.export import BatchSpanProcessor
 from opentelemetry.sdk.trace.export import ConsoleSpanExporter
 
 import SLConsoleSpanExporter
-
+asdasfsafafa
 provider = TracerProvider()
 processor = BatchSpanProcessor(SLConsoleSpanExporter.SLConsoleSpanExporter())
 provider.add_span_processor(processor)
@@ -29,7 +29,11 @@ def qotd():
         return doRequest()
 
 
-        
+@app.route("/login")
+def login():
+
+    with tracer.start_as_current_span("login_request"):
+        pass# put rest of your code here
     
 def doRequest():
     randint = random.randint(0, len(quotes)-1)
